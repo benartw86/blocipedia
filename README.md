@@ -6,6 +6,7 @@
      `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
     ----------------------------------------------------------------- 
 
+## Blocipedia:  A web application for creating public and private Markdown-based wikis
 
 Welcome to your Rails project on Cloud9 IDE!
 

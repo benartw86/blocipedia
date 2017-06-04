@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'welcome/index'
+
+  get 'welcome/about'
+  
+  root 'welcome#index'
+  
+  # if routes.rb does not specify a GET action, the view will not be served, app won't know what to get when a user sends a request.
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
