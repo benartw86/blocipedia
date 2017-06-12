@@ -1,0 +1,13 @@
+<h1>Wikis for <%= current_user.email %></h1>
+  
+  <div>
+    <p><%= @wikis.each do |wiki| %></p>
+      <ul>
+        <li><%= link_to wiki.title, wiki_path(wiki.id) %></li>
+      </ul>
+    <% end %>
+  </div>
+  </br>
+  <div>
+    <%= link_to 'Create New Wiki', new_wiki_path, class: 'btn-lg btn-success' %>
+  </div>
