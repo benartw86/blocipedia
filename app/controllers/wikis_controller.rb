@@ -1,4 +1,8 @@
 class WikisController < ApplicationController
+  
+  before_action :set_wiki, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  
   def index
     @wikis = Wiki.all
   end
@@ -19,7 +23,6 @@ class WikisController < ApplicationController
   end
   
   def destroy 
-    @wiki = Wiki.find(params[:id])
     
     if @wiki.destroy
       flash[:notice] = "\"#{@wiki.title}\" was deleted successfully."
@@ -31,7 +34,6 @@ class WikisController < ApplicationController
   end
   
   def show
-    @wiki = Wiki.find(params[:id])
   end
 
   def new
@@ -39,21 +41,28 @@ class WikisController < ApplicationController
   end
 
   def edit
-    @wiki = Wiki.find(params[:id])
   end
   
   def update
-    @wiki = Wiki.find(params[:id])
-    @wiki.title = params[:wiki][:title]
-    @wiki.body = params[:wiki][:body]
     
-    if @wiki.save
+    if @wiki.update_attributes(wiki_params)
       
-      flash[:notice] = "Your wiki was saved."
+      flash[:notice] = "Your wiki was updated."
       redirect_to @wiki
     else
-      flash.now[:alert] = "Error.  Your wiki was not saved."
-      render :new
+      flash.now[:alert] = "Error.  Your wiki was not updated."
+      render :edit
     end
   end
+  
+  private
+    
+    def wiki_params
+      params.require(:wiki).permit(:title, :body)
+    end
+    
+    #use private method to avoid repetition above, example of strong paramaters to avoid repetition and keep model safe
+    def set_wiki
+      @wiki = Wiki.find(params[:id])
+    end
 end
