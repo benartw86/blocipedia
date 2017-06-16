@@ -5,6 +5,7 @@ class WikisController < ApplicationController
   
   def index
     @wikis = Wiki.all
+    authorize(@wikis)
   end
   
   def create
