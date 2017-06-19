@@ -2,7 +2,7 @@
   
   <div>
     <p><% @wikis.each do |wiki| %></p>
-      <ul>
+      <ul> 
         <li><%= link_to wiki.title, wiki_path(wiki.id) %></li>
       </ul>
     <% end %>

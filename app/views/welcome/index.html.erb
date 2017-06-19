@@ -5,3 +5,29 @@
       <h3 class="text-center">Signed in as: <strong><%= current_user.email %></strong>
   <% end %>        
 </div>
+
+<!-- show list of wikis from all users -->
+
+<div class="container">
+  
+  <% if user_signed_in? %>
+    <h2>User index</h2>
+    <% @users.each do |user| %>
+      <ul>
+        <li><%= user.email %> <%= link_to 'Wiki index', wikis_path(user) %></li> 
+      </ul>
+    <% end %>  
+  <% end %>
+</div>
+
+<br>
+
+<div>
+  <% if user_signed_in? %>
+    <%= link_to 'Create New Wiki', new_wiki_path, class: 'btn-lg btn-success' %>
+  <% end %>
+</div>
+
+
+  
+

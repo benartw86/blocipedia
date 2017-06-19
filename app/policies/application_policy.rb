@@ -22,8 +22,9 @@ class ApplicationPolicy
     create?
   end
 
+  #users need to be able to edit any public wiki, if a user is present, they can edit the wiki
   def update?
-    false
+    user.present?
   end
 
   def edit?
