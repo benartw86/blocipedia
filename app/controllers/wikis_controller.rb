@@ -10,9 +10,7 @@ class WikisController < ApplicationController
   
   def create
     
-    @wiki = Wiki.new
-    @wiki.title = params[:wiki][:title] 
-    @wiki.body = params[:wiki][:body]
+    @wiki = Wiki.new(wiki_params)
     authorize(@wiki)
     
     if @wiki.save
