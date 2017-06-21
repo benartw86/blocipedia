@@ -6,8 +6,12 @@ class WikiPolicy < ApplicationPolicy
   def create?
     user.present?
   end
+  
+  def update?
+    user.present? && authorize(@record)
+  end
     
   def destroy?
-    user.admin? || user.present?
+    user.admin? || record.user == user
   end  
 end

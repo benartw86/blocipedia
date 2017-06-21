@@ -8,18 +8,6 @@
 
 <!-- show list of wikis from all users -->
 
-<div class="container">
-  
-  <% if user_signed_in? %>
-    <h2>User index</h2>
-    <% @users.each do |user| %>
-      <ul>
-        <li><%= user.email %> <%= link_to 'Wiki index', wikis_path(user) %></li> 
-      </ul>
-    <% end %>  
-  <% end %>
-</div>
-
 <br>
 
 <div>

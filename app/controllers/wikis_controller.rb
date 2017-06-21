@@ -9,10 +9,11 @@ class WikisController < ApplicationController
   end
   
   def create
-    authorize(@wiki)
+    
     @wiki = Wiki.new
     @wiki.title = params[:wiki][:title] 
     @wiki.body = params[:wiki][:body]
+    authorize(@wiki)
     
     if @wiki.save
       
@@ -46,7 +47,7 @@ class WikisController < ApplicationController
   end
   
   def update
-    
+    authorize(@wiki)
     if @wiki.update_attributes(wiki_params)
       
       flash[:notice] = "Your wiki was updated."
