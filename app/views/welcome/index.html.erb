@@ -1,20 +1,35 @@
-<div class="jumbotron">
-  <h1>Welcome!</h1>    
-  
-  <% if user_signed_in? %>
-      <h3 class="text-center">Signed in as: <strong><%= current_user.email %></strong>
-  <% end %>        
-</div>
+  <div class="jumbotron">
+    <h1>Welcome to Blocipedia!</h1>    
+      <p>Bloccit is a web app for creating mark down based Wikis.</p>
+        <% unless user_signed_in? %>
+          <p><%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-primary' %> today!</p>
+        <% end %>   
+        <% if user_signed_in? %>
+          <h3 class>Signed in as: <strong><%= current_user.email %></strong>
+        <% end %>    
+
+    <% if user_signed_in? %>
+      <%= link_to 'Create New Wiki', new_wiki_path, class: 'btn-lg btn-success' %>
+    <% end %>
+  </div>
 
 <!-- show list of wikis from all users -->
 
+
+
 <br>
 
-<div>
-  <% if user_signed_in? %>
-    <%= link_to 'Create New Wiki', new_wiki_path, class: 'btn-lg btn-success' %>
-  <% end %>
-</div>
+  <div class="col-md-6 well">
+    <h1>Standard Account</h1>
+      <p>Create and edit public wikis.  Standard account is free.</p>
+      <%= link_to 'Downgrade Account', edit_charge_path(current_user), class: 'btn-lg btn-danger', data: {confirm: 'Are you sure you want to downgrade your account?'} %>
+  </div>
+
+  <div class="col-md-6 well">
+    <h1>Premium Account</h1>
+      <p>Create and edit public/private wikis.  Click below to become a premium user.  15 dollars per month .</p>
+      <%= link_to 'Upgrade Account', new_charge_path, class: 'btn-lg btn-success' %>
+  </div>
 
 
   
