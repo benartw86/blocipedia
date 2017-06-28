@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   get 'about' => "welcome#about"
   
-  put 'downgrade' => 'charges#downgrade' 
+  get 'downgrade' => 'charges#downgrade' 
   
   put 'upgrade' => 'charges#upgrade'
   
