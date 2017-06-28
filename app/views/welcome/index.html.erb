@@ -22,13 +22,23 @@
   <div class="col-md-6 well">
     <h1>Standard Account</h1>
       <p>Create and edit public wikis.  Standard account is free.</p>
-      <%= link_to 'Downgrade Account', edit_charge_path(current_user), class: 'btn-lg btn-danger', data: {confirm: 'Are you sure you want to downgrade your account?'} %>
+      
+      <br>
+      
+      <% if current_user && current_user.premium? %>
+        <%= link_to 'Downgrade Account', downgrade_path, class: 'btn-lg btn-danger', data: {confirm: 'Are you sure you want to downgrade your account?'} %>
+      <% end %>
   </div>
 
   <div class="col-md-6 well">
     <h1>Premium Account</h1>
-      <p>Create and edit public/private wikis.  Click below to become a premium user.  15 dollars per month .</p>
-      <%= link_to 'Upgrade Account', new_charge_path, class: 'btn-lg btn-success' %>
+      <p>Create and edit public/private wikis.  Click below to become a premium user.  15 dollars per month.</p>
+      
+      <br>
+      
+      <% if current_user && current_user.standard? %>
+        <%= link_to 'Upgrade Account', new_charge_path, class: 'btn-lg btn-success' %>
+      <% end %>
   </div>
 
 

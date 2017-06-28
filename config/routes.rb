@@ -8,6 +8,10 @@ Rails.application.routes.draw do
 
   get 'about' => "welcome#about"
   
+  put 'downgrade' => 'charges#downgrade' 
+  
+  put 'upgrade' => 'charges#upgrade'
+  
   root 'welcome#index'
   
   # if routes.rb does not specify a GET action, the view will not be served, app won't know what to get when a user sends a request.

@@ -41,12 +41,11 @@ class ChargesController < ApplicationController
       redirect_to new_charge_path
   end
   
-  def edit
+  def downgrade
     @user = current_user
     User.downgrade_role(@user)
     
     flash[:notice] = "You have successfully downgraded to standard, #{current_user.email}! Become premium again below."
     redirect_to root_path
-    
   end
 end
