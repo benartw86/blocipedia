@@ -7,4 +7,15 @@ class User < ActiveRecord::Base
   enum role: [:standard, :premium, :admin]
          
   has_many :wikis
+  
+  #method to change the role attribute for the current user.  Link included in index view page.  Perhaps this method should be a Role controller that can direct
+  #to a page where you can choose your role?
+  
+  def self.upgrade_role(user)
+    user.premium!  
+  end
+  
+  def self.downgrade_role(user)
+    user.standard!
+  end
 end
