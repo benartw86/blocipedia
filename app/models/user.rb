@@ -18,4 +18,11 @@ class User < ActiveRecord::Base
   def self.downgrade_role(user)
     user.standard!
   end
+  
+   def self.publicize_wikis(user)   
+      user.wikis.where(private: true) do |wiki|
+        wiki.private = false
+        wiki.save
+    end
+  end
 end

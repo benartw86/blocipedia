@@ -4,8 +4,7 @@ class WikisController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @wikis = Wiki.all
-    authorize(@wikis)
+    @wikis = policy_scope(Wiki)
   end
   
   def create
@@ -38,6 +37,8 @@ class WikisController < ApplicationController
   end
   
   def show
+    authorize(@wiki)
+    @wiki = Wiki.find(params[:id])
   end
 
   def new
@@ -59,10 +60,14 @@ class WikisController < ApplicationController
     end
   end
   
+  def user_wikis
+    @wikis = current_user.wikis
+  end
+  
   private
     
     def wiki_params
-      params.require(:wiki).permit(:title, :body)
+      params.require(:wiki).permit(:title, :body, :private)
     end
     
     #use private method to avoid repetition above, example of strong paramaters to avoid repetition and keep model safe

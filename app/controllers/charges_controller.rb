@@ -1,4 +1,5 @@
 class ChargesController < ApplicationController
+  include ApplicationHelper
   
   def new
     @stripe_btn_data = {
@@ -41,8 +42,13 @@ class ChargesController < ApplicationController
       redirect_to new_charge_path
   end
   
+  #loop through the wikis of the user and change the private attribute to false
+  
   def downgrade
     @user = current_user
+    
+    User.publicize_wikis(@user)
+    
     User.downgrade_role(@user)
     
     flash[:notice] = "You have successfully downgraded to standard, #{current_user.email}! Become premium again below."
