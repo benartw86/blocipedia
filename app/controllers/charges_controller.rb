@@ -46,11 +46,10 @@ class ChargesController < ApplicationController
   
   def downgrade
     @user = current_user
+    @wikis = current_user.wikis
     
-    User.publicize_wikis(@user)
-    
+    @user.publicize_wikis
     User.downgrade_role(@user)
-    
     flash[:notice] = "You have successfully downgraded to standard, #{current_user.email}! Become premium again below."
     redirect_to root_path
   end
