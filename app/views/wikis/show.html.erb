@@ -3,9 +3,9 @@
     <h1><%= @wiki.title %></h1>
   </div>
   
-  <div class="col-md-8">
+  <div class=".container-fluid">
     <div class="well">
-      <p><%= @wiki.body%></p>      
+      <p><%= markdown(@wiki.body)%></p>      
     </div>      
   </div>
     </br>

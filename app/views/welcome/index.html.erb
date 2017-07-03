@@ -26,7 +26,7 @@
       <br>
       
       <% if current_user && current_user.premium? %>
-        <%= link_to 'Downgrade Account', downgrade_path, class: 'btn-lg btn-danger', data: {confirm: 'Are you sure you want to downgrade your account?'} %>
+        <%= link_to 'Downgrade Account', downgrade_path, method: :put, class: 'btn-lg btn-danger', data: {confirm: 'Are you sure you want to downgrade your account?  All private wikis will be public!'} %>
       <% end %>
   </div>
 

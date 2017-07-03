@@ -10,7 +10,6 @@ class User < ActiveRecord::Base
   
   #method to change the role attribute for the current user.  Link included in index view page.  Perhaps this method should be a Role controller that can direct
   #to a page where you can choose your role?
-  
   def self.upgrade_role(user)
     user.premium!  
   end
@@ -18,4 +17,19 @@ class User < ActiveRecord::Base
   def self.downgrade_role(user)
     user.standard!
   end
+  
+  def publicize_wikis
+    wikis.each do |wiki|
+      if wiki.private == true
+        wiki.update_attributes(private: false)
+      end
+    end
+  end
+
+  #def publicize_wikis   
+  #  wikis.where(private: true) do |wiki|
+  #    wiki.private = false
+  #    wiki.save
+  #  end
+  #end
 end
