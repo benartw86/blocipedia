@@ -4,11 +4,14 @@ Rails.application.routes.draw do
 
   resources :wikis
 
+
+  get '/user_wikis', to: 'wikis#user_wikis'
+      
   devise_for :users
 
   get 'about' => "welcome#about"
   
-  get 'downgrade' => 'charges#downgrade' 
+  put 'downgrade' => 'charges#downgrade' 
   
   put 'upgrade' => 'charges#upgrade'
   

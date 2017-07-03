@@ -1,0 +1,11 @@
+<tr>
+  <!-- If a wiki is private and its user is not signed in, do not display the private wiki -->  
+  <% if current_user %> 
+    <td><%= wiki.title %></td>
+    <td><%= link_to 'Show', wiki %></td>
+    <td><%= link_to 'Edit', edit_wiki_path(wiki) %></td>
+  <% end %>
+  <% if policy(wiki).destroy? %>
+    <td><%= link_to 'Delete', wiki, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  <% end %>
+</tr>
