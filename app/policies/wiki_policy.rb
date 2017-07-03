@@ -32,7 +32,7 @@ class WikiPolicy < ApplicationPolicy
   end
   
   def update?
-    user.present? && (record.private || record.users.include?(user))
+    user.present? # && (record.private || record.user.include?(user))
   end
     
   def destroy?
