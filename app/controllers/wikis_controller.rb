@@ -4,7 +4,7 @@ class WikisController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @wikis = policy_scope(Wiki)
+    @wikis = policy_scope(Wiki)  
   end 
   
   def create
@@ -46,9 +46,14 @@ class WikisController < ApplicationController
   end
 
   def edit
+    @user = current_user
+    @wiki = Wiki.find(params[:id])
+    @user_emails = User.where.not(id: current_user.id || @wiki.users.pluck(:id)).map(&:email)
+    authorize(@wiki)
   end
   
   def update
+    
     authorize(@wiki)
     if @wiki.update_attributes(wiki_params)
       

@@ -1,15 +1,16 @@
 Rails.application.routes.draw do
+
+  get 'about' => "welcome#about"
   
+  resources :collaborators
+
   resources :charges, only: [:new, :create, :edit]
 
   resources :wikis
 
-
   get '/user_wikis', to: 'wikis#user_wikis'
       
   devise_for :users
-
-  get 'about' => "welcome#about"
   
   put 'downgrade' => 'charges#downgrade' 
   

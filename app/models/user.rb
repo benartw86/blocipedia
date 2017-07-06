@@ -5,8 +5,12 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
          
   enum role: [:standard, :premium, :admin]
+  
+  #relate private wikis with users through collaborators.
          
   has_many :wikis
+  has_many :collaborators
+  has_many :wiki_collaborations, through: :collaborators, source: :wiki
   
   #method to change the role attribute for the current user.  Link included in index view page.  Perhaps this method should be a Role controller that can direct
   #to a page where you can choose your role?
@@ -24,7 +28,7 @@ class User < ActiveRecord::Base
         wiki.update_attributes(private: false)
       end
     end
-  end
+  end  
 
   #def publicize_wikis   
   #  wikis.where(private: true) do |wiki|
