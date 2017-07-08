@@ -8,9 +8,9 @@ class User < ActiveRecord::Base
   
   #relate private wikis with users through collaborators.
          
-  has_many :wikis
+  # has_many :wikis
   has_many :collaborators
-  has_many :wiki_collaborations, through: :collaborators, source: :wiki
+  has_many :wikis, through: :collaborators
   
   #method to change the role attribute for the current user.  Link included in index view page.  Perhaps this method should be a Role controller that can direct
   #to a page where you can choose your role?

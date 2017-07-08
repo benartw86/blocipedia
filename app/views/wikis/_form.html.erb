@@ -17,7 +17,7 @@
         <% if current_user.admin? || current_user.premium? %>
           <div class="form-group">
             <%= f.label :private, class: 'checkbox' do %>
-              <%= f.check_box :private %> Private wiki
+              <%= f.check_box :private %> Private wiki  
            <% end %>
           </div>
         <% end %>
@@ -28,6 +28,6 @@
     </div>
   </div>
   
-  <!-- <%= link_to "Add collaborators", collaborators_path %> link to separate page with collaborators listed? -->
+  
  
  

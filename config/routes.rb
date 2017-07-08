@@ -2,11 +2,11 @@ Rails.application.routes.draw do
 
   get 'about' => "welcome#about"
   
-  resources :collaborators
+  resources :wikis do
+    resources :collaborators, only: [:create, :destroy]
+  end
 
   resources :charges, only: [:new, :create, :edit]
-
-  resources :wikis
 
   get '/user_wikis', to: 'wikis#user_wikis'
       

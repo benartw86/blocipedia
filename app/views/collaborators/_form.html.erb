@@ -1,32 +1,35 @@
 <h1>Add a Collaborator to the current Wiki</h1>
 
 <div class="row">
-  <% if current_user.admin? || current_user.premium? %>
-    <div class="field">
+  <div class="col-md-8">
+  <% current_user.admin? || current_user.premium? %>
+    <div class="form-group">
       <%= form_for [@wiki, Collaborator.new] do |f| %>
         <%= f.label :collaborators %>
         <%= f.select :user, options_for_select(@user_emails, :selected => params[:user]) %>
-      <% f.submit 'Save' %>
+        <div class="form-group">
+          <%= f.submit "Save", class: 'btn btn-success' %>
+        </div>
     <% end %> 
     <% if @wiki.users.any? %>
       <h3>Current Collaborators</h3>
-      <%= @wiki.users.each do |user| %>
-        <p><%= user.email %>
-        |  <%= link_to "x", wiki_collaborator_path(user_id: @user_id, wiki_id: @wiki_id), method: :delete %>
-        </p>
+      <% @wiki.collaborators.each do |c| %>
+        <ul>
+        <li><%= c.user.email %>  |  <%= link_to "x", wiki_collaborator_path(@wiki, c), method: :delete %></li>
+        </ul>
       <% end %>   
     <% end %>    
     </div>
   <% else %>
     <h3>Current Collaborators</h3>
-    <% @wiki.users.each do |user| %>
-      <% if user.email == current_user.email %>
-      <p><%= current_user.email %>
-      |  <%= link_to "x", wiki_collaborator_path(user_id: @user_id, wiki_id: @wiki_id), method: :delete %>
-      </p>
+    <% @wiki.collaborators.each do |c| %>
+      <% if @user.email == current_user.email %>
+        <ul>
+          <li><%= c.user.email %>  |  <%= link_to "x", wiki_collaborator_path(@wiki, c), method: :delete %></li>
+        </ul>
       <% end %>
-    <% end %>  
-  <% end %>    
+    <% end %> 
+  </div>  
 </div> 
 
 

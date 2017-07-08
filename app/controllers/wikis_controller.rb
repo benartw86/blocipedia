@@ -16,7 +16,7 @@ class WikisController < ApplicationController
     authorize(@wiki)
     
     if @wiki.save
-      
+        
       flash[:notice] = "Your wiki was saved."
       redirect_to @wiki
     else
@@ -49,7 +49,6 @@ class WikisController < ApplicationController
     @user = current_user
     @wiki = Wiki.find(params[:id])
     @user_emails = User.where.not(id: current_user.id || @wiki.users.pluck(:id)).map(&:email)
-    authorize(@wiki)
   end
   
   def update
@@ -80,3 +79,9 @@ class WikisController < ApplicationController
       @wiki = Wiki.find(params[:id])
     end
 end
+
+
+#if session[:user_id] != @wiki.user_id
+#      flash[:notice] = "Sorry!"
+#      redirect_to wikis_path
+#    end
