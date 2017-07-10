@@ -13,7 +13,7 @@ class WikisController < ApplicationController
    # or
     #@wiki = Wiki.new(wiki_params)
     #@wiki.user = current_user
-    authorize(@wiki)
+    #authorize(@wiki)
     
     if @wiki.save
         
@@ -37,7 +37,7 @@ class WikisController < ApplicationController
   end
   
   def show
-    authorize(@wiki)
+    #authorize(@wiki)
     @wiki = Wiki.find(params[:id])
   end
 
@@ -48,7 +48,7 @@ class WikisController < ApplicationController
   def edit
     @user = current_user
     @wiki = Wiki.find(params[:id])
-    @user_emails = User.where.not(id: current_user.id || @wiki.users.pluck(:id)).map(&:email)
+    @user_emails = User.where.not(id: current_user.id || @wiki.users.pluck(:id))
   end
   
   def update

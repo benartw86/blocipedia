@@ -22,7 +22,10 @@
           </div>
         <% end %>
         <div class="form-group">
-          <%= f.submit "Save", class: 'btn btn-success' %>
+          <%= f.submit "Save", class: 'btn-lg btn-success' %>
+          <% if @wiki.user(current_user) || current_user.admin? %>
+            <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn-lg btn-danger', data: {confirm: 'Are you sure you want to delete this wiki forever?'} %>
+          <% end %>
         </div>
       <% end %>
     </div>
