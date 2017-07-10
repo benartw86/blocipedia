@@ -3,3 +3,9 @@
   </div>   
   
   <%= render partial: 'form', locals: { user: @user, wiki: @wiki} %>
+ 
+ 
+  <% if current_user.premium? || current_user.admin? || @wiki.users.include?(current_user) %>
+    <%= render partial: 'collaborators/form' %>
+  <% end %>
+  

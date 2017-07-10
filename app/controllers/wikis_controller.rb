@@ -4,8 +4,8 @@ class WikisController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @wikis = policy_scope(Wiki)
-  end
+    @wikis = policy_scope(Wiki)  
+  end 
   
   def create
     
@@ -13,10 +13,10 @@ class WikisController < ApplicationController
    # or
     #@wiki = Wiki.new(wiki_params)
     #@wiki.user = current_user
-    authorize(@wiki)
+    #authorize(@wiki)
     
     if @wiki.save
-      
+        
       flash[:notice] = "Your wiki was saved."
       redirect_to @wiki
     else
@@ -37,7 +37,7 @@ class WikisController < ApplicationController
   end
   
   def show
-    authorize(@wiki)
+    #authorize(@wiki)
     @wiki = Wiki.find(params[:id])
   end
 
@@ -46,9 +46,13 @@ class WikisController < ApplicationController
   end
 
   def edit
+    @user = current_user
+    @wiki = Wiki.find(params[:id])
+    @user_emails = User.where.not(id: current_user.id || @wiki.users.pluck(:id))
   end
   
   def update
+    
     authorize(@wiki)
     if @wiki.update_attributes(wiki_params)
       
@@ -75,3 +79,9 @@ class WikisController < ApplicationController
       @wiki = Wiki.find(params[:id])
     end
 end
+
+
+#if session[:user_id] != @wiki.user_id
+#      flash[:notice] = "Sorry!"
+#      redirect_to wikis_path
+#    end
